@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.keephealth.yjj.mapper.articles.ArticleMapper">
+    <resultMap id="articleMap" type="team.keephealth.yjj.domain.entity.articles.Article">
+        <result property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="accountId" column="account_id"/>
+        <result property="contentId" column="content_id"/>
+        <result property="title" column="title"/>
+        <result property="brief" column="words"/>
+        <result property="articleCheck" column="article_check"/>
+        <result property="checkOpinion" column="check_opinion"/>
+        <result property="kudosNumber" column="kudos_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="selectByAccount">
+        SELECT * FROM sys_article
+        WHERE account = #{account}
+    </insert>
+
+    <insert id="updateCheck">
+        UPDATE sys_article
+        SET article_check = #{check}
+        WHERE id = #{id}
+    </insert>
+
+    <insert id="updateOpinion">
+        UPDATE sys_article
+        SET check_opinion = #{opinion}
+        WHERE id = #{id}
+    </insert>
+
+    <insert id="selectLast">
+        SELECT MAX(id) id FROM sys_article
+        WHERE account_id = #{id}
+    </insert>
+
+    <insert id="getContentId">
+        SELECT content_id FROM sys_article
+        WHERE id = #{id}
+    </insert>
+
+    <insert id="getUserId">
+        SELECT account_id FROM sys_article
+        WHERE id = #{id}
+    </insert>
+</mapper>

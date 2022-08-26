@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.keephealth.yjj.mapper.articles.ArticleNumberMapper">
+    <resultMap id="articleMap" type="team.keephealth.yjj.domain.entity.articles.Article">
+        <result property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="accountId" column="account_id"/>
+        <result property="contentId" column="content_id"/>
+        <result property="title" column="title"/>
+        <result property="brief" column="brief"/>
+        <result property="articleCheck" column="article_check"/>
+        <result property="checkOpinion" column="check_opinion"/>
+        <result property="kudosNumber" column="kudos_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="getDataNumber">
+        SELECT count(id) FROM sys_article
+        WHERE article_check = 1
+    </insert>
+
+    <insert id="getUNumber">
+        SELECT count(id) FROM sys_article
+        WHERE article_check = 1 AND account_id = #{id}
+    </insert>
+
+    <insert id="getANumber">
+        SELECT COUNT(id) FROM sys_article
+        WHERE account_id = #{id}
+        <if test="state == 1"> AND article_check = 0 </if>
+        <if test="state == 2"> AND article_check = 1 </if>
+        <if test="state == 3"> AND article_check = 2 </if>
+    </insert>
+
+</mapper>

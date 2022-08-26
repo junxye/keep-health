@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.keephealth.yjj.mapper.articles.ArticleQueryMapper">
+    <resultMap id="articleMap" type="team.keephealth.yjj.domain.entity.articles.Article">
+        <result property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="accountId" column="account_id"/>
+        <result property="contentId" column="content_id"/>
+        <result property="title" column="title"/>
+        <result property="brief" column="brief"/>
+        <result property="articleCheck" column="article_check"/>
+        <result property="checkOpinion" column="check_opinion"/>
+        <result property="kudosNumber" column="kudos_number"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="queryByUser">
+        SELECT id, account, title, brief, kudous_number, create_time, update_time
+        FROM sys_article
+        WHERE account_id = #{id} AND article_check = 1
+        <if test="kind == 0"> ORDER BY create_time </if>
+        <if test="kind == 1"> ORDER BY update_time </if>
+        <if test="kind == 2"> ORDER BY kudos_number </if>
+        <if test="direction == 0"> DESC </if>
+    </insert>
+
+    <insert id="queryByAll">
+        SELECT id, account, title, brief, kudous_number, create_time, update_time
+        FROM sys_article
+        WHERE article_check = 1
+        <if test="kind == 0"> ORDER BY create_time </if>
+        <if test="kind == 1"> ORDER BY update_time </if>
+        <if test="kind == 2"> ORDER BY kudos_number </if>
+        <if test="direction == 0"> DESC </if>
+    </insert>
+
+    <insert id="queryByKeyword">
+        SELETE id, account, title, brief, kudous_number, create_time, update_time
+        FROM sys_article
+        WHERE sys_article = 1
+        LIKE '%'#{keyword}'%'
+    </insert>
+
+
+</mapper>
