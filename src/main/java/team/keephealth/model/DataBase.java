@@ -21,9 +21,6 @@ user_id pid score
 1       2    2.74
  */
 public class DataBase {
-    private static final String URL = "jdbc:mysql://101.43.56.126:3306/keep-health?characterEncoding=utf-8&serverTimezone=Asia/Shanghai";
-    private static final String USERNAME = "keep-health";
-    private static final String PASSWORD = "keephealth";
     private Connection connection = null;
     private int sportType = 10;
 
